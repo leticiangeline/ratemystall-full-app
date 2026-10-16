@@ -1,0 +1,274 @@
+/* ==========================================================================
+   Rate My Stall - Scrapbook Theme
+   - Background: Lush green hills and blue sky (image 3)
+   - Content: Scrapbook cards nesting the stall text content (image 2)
+   - Clips: Authentic clips clamping the top of each note card (image 1 & 2)
+   ========================================================================== */
+
+:root {
+  --font-hand: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+  --font-title: 'Caveat', 'Patrick Hand', cursive, sans-serif;
+  --font-clean: 'Quicksand', system-ui, -apple-system, sans-serif;
+  --ink: #2d2621;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--font-hand);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #7bb33e;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ==========================================================================
+   Scrapbook Board / Desk
+   ========================================================================== */
+
+main {
+  width: 100%;
+  max-width: 780px;
+  background: rgba(254, 250, 243, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 48px 36px 52px;
+  box-shadow:
+    0 24px 48px rgba(35, 45, 20, 0.22),
+    0 6px 12px rgba(35, 45, 20, 0.1),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+  position: relative;
+  text-align: center;
+}
+
+/* Corner washi tape decorations on the board */
+main::before,
+main::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 90px;
+  height: 26px;
+  background: rgba(255, 225, 140, 0.7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+main::before {
+  left: 30px;
+  transform: rotate(-12deg);
+}
+
+main::after {
+  right: 30px;
+  transform: rotate(10deg);
+}
+
+/* ==========================================================================
+   Header: Washi Tape Badge
+   ========================================================================== */
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: #382c23;
+  margin: 0 auto 46px;
+  display: inline-block;
+  padding: 8px 40px;
+  background: #fffdf7;
+  border: 2px dashed #d4b483;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(50, 40, 20, 0.12);
+  transform: rotate(-1.5deg);
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  position: relative;
+}
+
+/* Small cute sticker on header */
+h1::after {
+  content: '✂';
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  font-size: 1.3rem;
+  color: #c25953;
+  transform: rotate(20deg);
+}
+
+/* ==========================================================================
+   Stalls List (Grid of Scrapbook Notes)
+   ========================================================================== */
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px 28px;
+  justify-items: center;
+}
+
+/* Base Note Paper */
+li {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  min-height: 150px;
+  padding: 38px 22px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fffefb;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 24px rgba(45, 35, 20, 0.16),
+    0 2px 6px rgba(45, 35, 20, 0.08);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #2b231d;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+/* Top Paperclip / Bulldog Clip on every note */
+li::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 48px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  z-index: 5;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.28));
+  pointer-events: none;
+}
+
+/* Hover lift effect */
+li:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow:
+    0 18px 32px rgba(45, 35, 20, 0.22),
+    0 6px 10px rgba(45, 35, 20, 0.12);
+}
+
+/* ==========================================================================
+   Scrapbook Note Variations (Inspired by Image 2)
+   ========================================================================== */
+
+/* Note 1: Light blue gingham style, blue bulldog clip */
+li:nth-child(1) {
+  transform: rotate(-2.2deg);
+  background:
+    radial-gradient(#ffffff 70%, transparent 72%) 0 0/12px 12px,
+    #fffdf5;
+  border: 3px solid #f87171;
+  outline: 6px solid rgba(186, 230, 253, 0.7);
+}
+
+li:nth-child(1)::before {
+  background-image: url('/clips/clip-blue.png');
+}
+
+/* Note 2: Crimson red notepaper, red bulldog clip */
+li:nth-child(2) {
+  transform: rotate(1.8deg);
+  background: #fffdf5;
+  border-left: 10px solid #be123c;
+  border-top: 1px solid #fecdd3;
+  border-right: 1px solid #fecdd3;
+  border-bottom: 2px solid #fecdd3;
+  box-shadow:
+    4px 10px 24px rgba(45, 35, 20, 0.16),
+    -3px 4px 0 #991b1b;
+}
+
+li:nth-child(2)::before {
+  background-image: url('/clips/clip-red.png');
+}
+
+/* Note 3: Yellow gingham with stitched border, yellow bulldog clip */
+li:nth-child(3) {
+  transform: rotate(2deg);
+  background: #fffef2;
+  border: 2px dashed #f59e0b;
+  outline: 6px solid rgba(254, 240, 138, 0.65);
+}
+
+li:nth-child(3)::before {
+  background-image: url('/clips/clip-yellow.png');
+}
+
+/* Note 4: Scalloped pastel card, silver metallic bulldog clip */
+li:nth-child(4) {
+  transform: rotate(-1.5deg);
+  background: #fdfcf7;
+  border: 2px solid #94a3b8;
+  outline: 6px solid rgba(203, 213, 225, 0.65);
+}
+
+li:nth-child(4)::before {
+  background-image: url('/clips/clip-silver.png');
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  main {
+    padding: 36px 18px 40px;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+    padding: 6px 24px;
+    margin-bottom: 36px;
+  }
+
+  ul {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  li {
+    font-size: 1.2rem;
+    min-height: 130px;
+  }
+}
