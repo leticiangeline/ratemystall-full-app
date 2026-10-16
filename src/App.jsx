@@ -1,5 +1,5 @@
 import { stalls } from "./stalls.js";
-import { countRatings } from "./rating.js";
+import { countRatings, averageRating } from "./rating.js";
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <ul>
         {stalls.map((stall) => (
           <li key={stall.id}>
-            {stall.name} ({countRatings(stall.ratings)} ratings)
+            {stall.name}: {averageRating(stall.ratings).toFixed(1)} ★ ({countRatings(stall.ratings)} reviews)
           </li>
         ))}
       </ul>
