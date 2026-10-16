@@ -7,4 +7,4 @@ test("countRatings counts the ratings", () => {
 
 test("averageRating gives the average", () => {
   expect(averageRating([4, 5, 3])).toBe(4);
-});
+

@@ -1,15 +1,55 @@
 /* ==========================================================================
-   Rate My Stall - Scrapbook Theme
-   - Background: Lush green hills and blue sky (image 3)
-   - Content: Scrapbook cards nesting the stall text content (image 2)
-   - Clips: Authentic clips clamping the top of each note card (image 1 & 2)
+   Rate My Stall - Corkboard & Scrapbook Theme
+   - Layout: Pastel yellow background with left sidebar & right corkboard
+   - Board: Wooden frame corkboard with lace & stickers
+   - Notes: Pushpinned scrapbook note cards
+   - Scrollbar: Custom in-board scrollbar for browsing stalls
+   - Blythe Mat: Guide books sticker in bottom-right corner
    ========================================================================== */
 
+@font-face {
+  font-family: 'Unchanged Thoughts';
+  src: url('/fonts/unchanged.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Handwriting';
+  src: url('/fonts/Handwriting-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Baby Doll';
+  src: url('/fonts/babydoll.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Retron2000';
+  src: url('/fonts/Retron2000.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  --font-logo: 'Unchanged Thoughts', 'Caveat', cursive, sans-serif;
+  --font-restaurant: 'Handwriting', 'Patrick Hand', cursive, sans-serif;
+  --font-area: 'Baby Doll', 'Patrick Hand', cursive, sans-serif;
+  --font-retro: 'Retron2000', monospace, sans-serif;
   --font-hand: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
   --font-title: 'Caveat', 'Patrick Hand', cursive, sans-serif;
   --font-clean: 'Quicksand', system-ui, -apple-system, sans-serif;
-  --ink: #2d2621;
+  --ink: #2d2319;
+  --neutral-dark: #1e252f;
+  --bg-light-blue: #cee3f6;
 }
 
 * {
@@ -23,252 +63,447 @@ body {
   min-height: 100vh;
   font-family: var(--font-hand);
   color: var(--ink);
+  background-color: var(--bg-light-blue);
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
 }
 
-body {
-  background-color: #7bb33e;
-  background-image: url('/background.jpg');
-  background-size: cover;
-  background-position: center bottom;
+/* Delicate stipple flourish texture on the right side */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55vw;
+  max-width: 720px;
+  background-image: url('/right-texture.png');
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  background-position: right 15px center;
+  background-size: contain;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
 }
 
 #root {
-  width: 100%;
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Page Layout: Sidebar (Left) + Cork Bulletin Board (Right)
+   ========================================================================= */
+
+.page-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1320px;
+  min-height: 100vh;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+/* ==========================================================================
+   Sidebar: Logo & Area Selector
+   ========================================================================== */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 200px;
+  max-width: 260px;
+  flex-shrink: 0;
+}
+
+.logo-title {
+  margin: 0 0 38px 0;
+  font-family: var(--font-logo);
+  font-size: 3.8rem;
+  font-weight: normal;
+  line-height: 1.1;
+  color: var(--neutral-dark);
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0.5px;
+}
+
+.logo-title span {
+  display: block;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 250px;
+  background: #c0c0c0;
+  padding: 10px 12px 12px;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  box-shadow: 2px 2px 0 #000000;
+  border-radius: 0;
+}
+
+.filter-label {
+  font-family: var(--font-retro);
+  font-size: 1.15rem;
+  font-weight: normal;
+  color: #000080; /* Classic early internet Windows title navy */
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-label::before {
+  content: '▶';
+  font-size: 0.7rem;
+  color: #000080;
+}
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.area-dropdown {
+  width: 100%;
+  padding: 5px 30px 5px 8px;
+  font-family: var(--font-retro);
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  color: #000000;
+  background-color: #ffffff;
+  border-top: 2px solid #808080;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: inset 1px 1px 0 #000000;
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='20' viewBox='0 0 18 20'%3E%3Crect x='0' y='0' width='18' height='20' fill='%23c0c0c0'/%3E%3Cline x1='0' y1='0' x2='18' y2='0' stroke='%23ffffff' stroke-width='2'/%3E%3Cline x1='0' y1='0' x2='0' y2='20' stroke='%23ffffff' stroke-width='2'/%3E%3Cline x1='17' y1='0' x2='17' y2='20' stroke='%23808080' stroke-width='2'/%3E%3Cline x1='0' y1='19' x2='18' y2='19' stroke='%23808080' stroke-width='2'/%3E%3Cpolygon points='5,8 13,8 9,13' fill='%23000000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 2px center;
+}
+
+.area-dropdown:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -3px;
+}
+
+.area-dropdown option {
+  font-family: var(--font-retro);
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: #000000;
+  padding: 4px 6px;
+}
+
+/* ==========================================================================
+   Cork Bulletin Board
+   ========================================================================== */
+
+.board-container {
+  flex: 1;
+  max-width: 900px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
 }
 
-/* ==========================================================================
-   Scrapbook Board / Desk
-   ========================================================================== */
-
-main {
+.cork-board {
+  position: relative;
   width: 100%;
-  max-width: 780px;
-  background: rgba(254, 250, 243, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 28px;
-  padding: 48px 36px 52px;
+  aspect-ratio: 736 / 508;
+  min-height: 480px;
+  background-image: url('/board.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 4px;
   box-shadow:
-    0 24px 48px rgba(35, 45, 20, 0.22),
-    0 6px 12px rgba(35, 45, 20, 0.1),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.7);
-  position: relative;
-  text-align: center;
-}
-
-/* Corner washi tape decorations on the board */
-main::before,
-main::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  width: 90px;
-  height: 26px;
-  background: rgba(255, 225, 140, 0.7);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-}
-
-main::before {
-  left: 30px;
-  transform: rotate(-12deg);
-}
-
-main::after {
-  right: 30px;
-  transform: rotate(10deg);
+    0 20px 45px rgba(60, 45, 15, 0.22),
+    0 4px 12px rgba(60, 45, 15, 0.12);
 }
 
 /* ==========================================================================
-   Header: Washi Tape Badge
+   Scrollable Area Inside Corkboard (With Custom Scrollbar)
    ========================================================================== */
 
-h1 {
-  font-family: var(--font-title);
-  font-size: 3.4rem;
-  font-weight: 700;
-  color: #382c23;
-  margin: 0 auto 46px;
-  display: inline-block;
-  padding: 8px 40px;
-  background: #fffdf7;
-  border: 2px dashed #d4b483;
-  border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(50, 40, 20, 0.12);
-  transform: rotate(-1.5deg);
-  letter-spacing: 0.5px;
-  line-height: 1.1;
-  position: relative;
+.board-scroll-area {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 28px;
+  right: 68px; /* Leave breathing space for lace ribbon and decorative stickers */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 18px 48px 14px;
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #ba7d44 rgba(255, 255, 255, 0.35);
 }
 
-/* Small cute sticker on header */
-h1::after {
-  content: '✂';
-  position: absolute;
-  top: -14px;
-  right: -10px;
-  font-size: 1.3rem;
-  color: #c25953;
-  transform: rotate(20deg);
+/* WebKit (Chrome, Edge, Safari) scrollbar */
+.board-scroll-area::-webkit-scrollbar {
+  width: 9px;
+}
+
+.board-scroll-area::-webkit-scrollbar-track {
+  background: rgba(160, 105, 50, 0.18);
+  border-radius: 10px;
+  margin: 14px 0;
+}
+
+.board-scroll-area::-webkit-scrollbar-thumb {
+  background: #ba7d44;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 250, 240, 0.7);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.board-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #965f2c;
 }
 
 /* ==========================================================================
-   Stalls List (Grid of Scrapbook Notes)
+   Stalls Grid & Pinned Scrapbook Notes
    ========================================================================== */
 
-ul {
+.stalls-grid {
   list-style: none;
-  padding: 0;
+  padding: 12px 10px;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 40px 28px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 36px 22px;
   justify-items: center;
 }
 
-/* Base Note Paper */
-li {
+.stall-note {
   position: relative;
   width: 100%;
-  max-width: 320px;
-  min-height: 150px;
-  padding: 38px 22px 22px;
+  max-width: 325px;
+  aspect-ratio: 1 / 0.96;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  background: #fffefb;
-  border-radius: 12px;
-  box-shadow:
-    0 10px 24px rgba(45, 35, 20, 0.16),
-    0 2px 6px rgba(45, 35, 20, 0.08);
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: #2b231d;
-  cursor: default;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-}
-
-/* Top Paperclip / Bulldog Clip on every note */
-li::before {
-  content: '';
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 58px;
-  height: 48px;
-  background-size: contain;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-position: center top;
-  z-index: 5;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.28));
-  pointer-events: none;
+  background-position: center;
+  filter: drop-shadow(0 2px 4px rgba(25, 15, 5, 0.45))
+          drop-shadow(0 8px 14px rgba(25, 15, 5, 0.35))
+          drop-shadow(0 18px 24px rgba(25, 15, 5, 0.25));
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
 }
 
-/* Hover lift effect */
-li:hover {
-  transform: translateY(-6px) scale(1.02) !important;
-  box-shadow:
-    0 18px 32px rgba(45, 35, 20, 0.22),
-    0 6px 10px rgba(45, 35, 20, 0.12);
+.stall-note:hover {
+  transform: translateY(-7px) scale(1.03) !important;
+  filter: drop-shadow(0 4px 6px rgba(20, 10, 5, 0.5))
+          drop-shadow(0 12px 20px rgba(20, 10, 5, 0.42))
+          drop-shadow(0 26px 34px rgba(20, 10, 5, 0.3));
 }
 
-/* ==========================================================================
-   Scrapbook Note Variations (Inspired by Image 2)
-   ========================================================================== */
-
-/* Note 1: Light blue gingham style, blue bulldog clip */
-li:nth-child(1) {
-  transform: rotate(-2.2deg);
-  background:
-    radial-gradient(#ffffff 70%, transparent 72%) 0 0/12px 12px,
-    #fffdf5;
-  border: 3px solid #f87171;
-  outline: 6px solid rgba(186, 230, 253, 0.7);
-}
-
-li:nth-child(1)::before {
-  background-image: url('/clips/clip-blue.png');
-}
-
-/* Note 2: Crimson red notepaper, red bulldog clip */
-li:nth-child(2) {
-  transform: rotate(1.8deg);
-  background: #fffdf5;
-  border-left: 10px solid #be123c;
-  border-top: 1px solid #fecdd3;
-  border-right: 1px solid #fecdd3;
-  border-bottom: 2px solid #fecdd3;
-  box-shadow:
-    4px 10px 24px rgba(45, 35, 20, 0.16),
-    -3px 4px 0 #991b1b;
-}
-
-li:nth-child(2)::before {
-  background-image: url('/clips/clip-red.png');
-}
-
-/* Note 3: Yellow gingham with stitched border, yellow bulldog clip */
-li:nth-child(3) {
-  transform: rotate(2deg);
-  background: #fffef2;
-  border: 2px dashed #f59e0b;
-  outline: 6px solid rgba(254, 240, 138, 0.65);
-}
-
-li:nth-child(3)::before {
-  background-image: url('/clips/clip-yellow.png');
-}
-
-/* Note 4: Scalloped pastel card, silver metallic bulldog clip */
-li:nth-child(4) {
+/* Clover Note: pink plaid backing, metallic clip, button, washi tape & four-leaf clover */
+.stall-note-clover {
+  background-image: url('/notes/note-clover.png');
   transform: rotate(-1.5deg);
-  background: #fdfcf7;
-  border: 2px solid #94a3b8;
-  outline: 6px solid rgba(203, 213, 225, 0.65);
 }
 
-li:nth-child(4)::before {
-  background-image: url('/clips/clip-silver.png');
+.stall-note-clover .stall-note-body {
+  width: 72%;
+  height: 60%;
+  margin-top: 15px;
+  margin-left: 0;
+  padding: 12px 16px;
+}
+
+/* Stars Note: orange gingham backing, corner bulldog clip, gold stars & teddy bear seal */
+.stall-note-stars {
+  background-image: url('/notes/note-stars.png');
+  transform: rotate(1.2deg);
+}
+
+.stall-note-stars .stall-note-body {
+  width: 70%;
+  height: 60%;
+  margin-top: 16px;
+  margin-left: 20px;
+  padding: 12px 14px;
+}
+
+/* Blue Penco Note: cream lined paper with dark blue Penco clip & denim star patches */
+.stall-note-blue {
+  background-image: url('/notes/note-blue-penco.png');
+  transform: rotate(-1deg);
+}
+
+.stall-note-blue .stall-note-body {
+  width: 78%;
+  height: 56%;
+  margin-top: 38px;
+  margin-left: 0;
+  padding: 8px 12px;
+}
+
+/* Flannel Note: red flannel backing, torn spiral paper, burgundy clip & safety pin */
+.stall-note-flannel {
+  background-image: url('/notes/note-flannel.png');
+  transform: rotate(1.5deg);
+}
+
+.stall-note-flannel .stall-note-body {
+  width: 70%;
+  height: 58%;
+  margin-top: 20px;
+  margin-left: 16px;
+  padding: 12px 14px;
+}
+
+/* Note Content Area centered on the inner paper */
+.stall-note-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+}
+
+.stall-area-badge {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: var(--font-area);
+  font-size: 1.3rem;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+  padding: 1px 10px;
+  border-radius: 12px;
+  background: rgba(35, 25, 15, 0.08);
+  color: #3b2c20;
+}
+
+/* Name and rating count share one line of text: the lesson's diff edits it as one line */
+.stall-label {
+  margin: 0;
+  font-family: var(--font-restaurant);
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #1e2633;
+  line-height: 1.15;
+  letter-spacing: 0.3px;
 }
 
 /* ==========================================================================
-   Responsive Adjustments
+   Blythe Books Mat (Bottom Right Sticker)
    ========================================================================== */
 
-@media (max-width: 640px) {
-  main {
-    padding: 36px 18px 40px;
-    border-radius: 20px;
-  }
+.blythe-mat {
+  position: absolute;
+  bottom: -22px;
+  right: 18px;
+  width: 145px;
+  height: auto;
+  z-index: 15;
+  pointer-events: none;
+  filter: drop-shadow(2px 6px 10px rgba(35, 25, 15, 0.38));
+  transform: rotate(-2deg);
+  transition: transform 0.25s ease;
+}
 
-  h1 {
-    font-size: 2.6rem;
-    padding: 6px 24px;
-    margin-bottom: 36px;
-  }
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 
-  ul {
-    grid-template-columns: 1fr;
+@media (max-width: 900px) {
+  .page-container {
+    flex-direction: column;
+    align-items: center;
     gap: 32px;
+    padding: 30px 16px 40px;
   }
 
-  li {
-    font-size: 1.2rem;
-    min-height: 130px;
+  .sidebar {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .logo-title {
+    margin-bottom: 24px;
+    font-size: 2.8rem;
+  }
+
+  .filter-group {
+    align-items: center;
+  }
+
+  .cork-board {
+    min-height: 420px;
+  }
+
+  .blythe-mat {
+    width: 120px;
+    bottom: -18px;
+    right: 12px;
+  }
+
+  body::after {
+    width: 75vw;
+    opacity: 0.35;
+    background-position: right -30px center;
+  }
+}
+
+@media (max-width: 600px) {
+  body::after {
+    width: 85vw;
+    opacity: 0.25;
+  }
+
+  .board-scroll-area {
+    left: 20px;
+    right: 48px;
+    top: 18px;
+    bottom: 18px;
+    padding: 16px 10px 40px;
+  }
+
+  .stalls-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .cork-board {
+    min-height: 380px;
+  }
+
+  .blythe-mat {
+    width: 95px;
+    bottom: -14px;
+    right: 8px;
   }
 }

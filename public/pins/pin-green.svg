@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48" width="40" height="48" fill="none">
+  <!-- Drop Shadow -->
+  <ellipse cx="20" cy="44" rx="10" ry="4" fill="rgba(0,0,0,0.28)"/>
+  <!-- Metallic Needle -->
+  <polygon points="18.5,24 21.5,24 20,44" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8"/>
+  <!-- Needle Highlight -->
+  <line x1="19.5" y1="25" x2="20" y2="41" stroke="#ffffff" stroke-width="0.7"/>
+  <!-- Bottom Flange / Rim of Pushpin Head -->
+  <ellipse cx="20" cy="24" rx="13" ry="5.5" fill="#15803d"/>
+  <ellipse cx="20" cy="23" rx="12" ry="5" fill="#16a34a"/>
+  <ellipse cx="20" cy="22" rx="10" ry="4" fill="#4ade80"/>
+  <!-- Pin Grip / Waist -->
+  <path d="M12,23 C12,17 14.5,14 15,11 L25,11 C25.5,14 28,17 28,23 Z" fill="#16a34a"/>
+  <path d="M13,22 C13,17.5 15,14.5 15.5,12 L24.5,12 C25,14.5 27,17.5 27,22 Z" fill="#4ade80"/>
+  <!-- Highlight on Waist -->
+  <path d="M15.5,12 C15,15 14,18 14,21" stroke="#86efac" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Top Dome / Head -->
+  <ellipse cx="20" cy="11" rx="10" ry="4.5" fill="#15803d"/>
+  <ellipse cx="20" cy="10" rx="9.5" ry="4" fill="#16a34a"/>
+  <ellipse cx="20" cy="9.5" rx="8" ry="3.2" fill="#4ade80"/>
+  <!-- Gloss highlight -->
+  <ellipse cx="17.5" cy="8.5" rx="3.5" ry="1.5" fill="#ffffff" opacity="0.7"/>
+</svg>
