@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { stalls } from "./stalls.js";
-import { countRatings } from "./rating.js";
+import { countRatings, averageRating } from "./rating.js";
 
 const NOTE_THEMES = ["clover", "stars", "blue", "flannel"];
 
@@ -66,7 +66,7 @@ function App() {
                         <span className="stall-area-badge">{stall.area}</span>
                       )}
                       <p className="stall-label">
-                        {stall.name} ({countRatings(stall.ratings)} ratings)
+                        {stall.name}: {averageRating(stall.ratings).toFixed(1)} ★ ({countRatings(stall.ratings)} reviews)
                       </p>
                     </div>
                   </li>
