@@ -66,7 +66,7 @@ function App() {
                         <span className="stall-area-badge">{stall.area}</span>
                       )}
                       <p className="stall-label">
-                        {stall.name}: {averageRating(stall.ratings).toFixed(1)} ★ ({countRatings(stall.ratings)} reviews)
+                        {stall.name}: {stall.ratings.length === 0 ? "No ratings yet" : `${averageRating(stall.ratings).toFixed(1)} ★`} ({countRatings(stall.ratings)} ratings)
                       </p>
                     </div>
                   </li>
